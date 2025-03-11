@@ -9,9 +9,13 @@ from people.models import OrdinaryPerson, UnordinaryPerson
 # Create your views here.
 @api_view(["GET"])
 def getOrdinaryPeople(request):
-    name = request.GET.get("name", "guest")
-    data: OrdinaryPerson = OrdinaryPerson.objects.get()
-    return JsonResponse(data, status=status.HTTP_200_OK)
+    try:
+        people = OrdinaryPerson.objects.all()
+        data = list(people.values())
+        return JsonResponse(data, safe=False)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
 
 
 @api_view(["GET"])
