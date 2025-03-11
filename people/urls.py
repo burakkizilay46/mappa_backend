@@ -6,6 +6,8 @@ app_name = "people"
 urlpatterns = [
     path("getOrdinaryPeople", views.getOrdinaryPeople, name="getOrdinaryPeople"),
     path("getOrdinaryPeople/<int:id>", views.getOrdinaryPeopleById, name="getOrdinaryPeopleById"),
+    path("createOrdinaryPeople", views.createOrdinaryPeople, name="createOrdinaryPeople"),
+    
     path("getUnordinaryPeople", views.getUnordinaryPeople, name="getUnordinaryPeople"),
     path("getUnordinaryPeople/<int:id>", views.getUnordinaryPeopleById, name="getUnordinaryPeopleById"),
 ]

@@ -29,7 +29,7 @@ class WrittenSource(models.Model):
     probable_year_written = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.id
+        return self.alternate_names
 
 
 class SecondarySource(models.Model):
