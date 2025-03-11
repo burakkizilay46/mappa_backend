@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'people.apps.PeopleConfig',
     'source.apps.SourceConfig',
+    'place.apps.PlaceConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

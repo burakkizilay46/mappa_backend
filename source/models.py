@@ -18,7 +18,7 @@ class Language(models.Model):
         return self.name
 
 
-class WrittenSources(models.Model):
+class WrittenSource(models.Model):
     alternate_names = models.CharField(max_length=200)  # want to array
     author = models.CharField(max_length=200)
     year_written = models.IntegerField()  # want to array
@@ -32,7 +32,7 @@ class WrittenSources(models.Model):
         return self.id
 
 
-class SecondarySources(models.Model):
+class SecondarySource(models.Model):
     alternate_names = models.CharField(max_length=200)  # want to array
     author = models.CharField(max_length=200)
     topic = models.CharField(max_length=200)

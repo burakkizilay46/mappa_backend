@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
-from .models import WrittenSources,SecondarySources
+from .models import WrittenSource,SecondarySource
 
 from django.http import JsonResponse
 
@@ -10,7 +10,7 @@ from django.http import JsonResponse
 @api_view(["GET"])
 def getWrittenSources(request):
     try:
-        sources = WrittenSources.objects.all()
+        sources = WrittenSource.objects.all()
         data = list(sources.values())
         return JsonResponse(data, safe=False)
     except Exception as e:
@@ -19,7 +19,7 @@ def getWrittenSources(request):
 @api_view(["GET"])
 def getSecondarySources(request):
     try:
-        sources = SecondarySources.objects.all()
+        sources = SecondarySource.objects.all()
         data = list(sources.values())
         return JsonResponse(data, safe=False)
     except Exception as e:
