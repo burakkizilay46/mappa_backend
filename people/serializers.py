@@ -75,7 +75,7 @@ class OrdinarySerializer(serializers.ModelSerializer):
 
 
 class UnordinarySerializer(serializers.ModelSerializer):
-    name = serializers.CharField(read_only=True)
+    name = serializers.CharField()
     ethnicity = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Ethnicity.objects.all()
     )
@@ -98,8 +98,8 @@ class UnordinarySerializer(serializers.ModelSerializer):
             "birth_year",
             "death_year",
             "description",
-            "probable_birth_year",
-            "probable_death_year",
+            "probable_birth_date",
+            "probable_death_date",
             "ethnicity",
             "religion",
             "profession",
