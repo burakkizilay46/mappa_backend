@@ -39,17 +39,11 @@ class Person(models.Model):
     description = models.TextField(null=True)
     probable_birth_date = models.DateTimeField(null=True, blank=True)
     probable_death_date = models.DateTimeField(null=True, blank=True)
-    ethnicity = models.ForeignKey(
-        Ethnicity, on_delete=models.SET_NULL, null=True, blank=True
-    )
+    ethnicity = models.ManyToManyField(Ethnicity, null=True, blank=True)
     religion = models.ManyToManyField(Religion, blank=True)
     gender = models.ForeignKey(Gender, on_delete=models.DO_NOTHING, null=True)
-    profession = models.ForeignKey(
-        Profession, on_delete=models.SET_NULL, null=True, blank=True
-    )
-    sources = models.OneToOneField(
-        WrittenSource, on_delete=models.CASCADE, null=True, blank=True
-    )
+    profession = models.ManyToManyField(Profession, null=True, blank=True)
+    sources = models.ManyToManyField(WrittenSource, null=True, blank=True)
 
     def __str__(self):
         return self.name
