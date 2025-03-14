@@ -17,16 +17,6 @@ def get_ordinary_people(request):
         return Response({"error": str(e)}, status=500)
 
 
-@api_view(["GET"])
-def get_ordinary_byid(request, id):
-    try:
-        person = OrdinaryPerson.objects.get(id=id)
-        serialized_person = OrdinarySerializer(person, many=False).data
-        return Response(serialized_person, status=201)
-    except Exception as e:
-        return Response({"error": str(e)}, status=500)
-
-
 @api_view(["POST"])
 def create_ordinary_person(request):
     try:
@@ -38,19 +28,18 @@ def create_ordinary_person(request):
     except Exception as e:
         return Response({"error": str(e)}, status=500)
 
-
-@api_view(["DELETE"])
-def delete_ordinary_person(request, id):
+@api_view(["GET", "DELETE", "PUT", "PATCH"])
+def ordinary_person_detail(request, id):
     person = get_object_or_404(OrdinaryPerson, id=id)
-    person.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-@api_view(["PUT"])
-def update_ordinary_person(request, id):
-    person = get_object_or_404(OrdinaryPerson, id=id)
-    serializer = OrdinarySerializer(instance=person, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
+    if request.method == "GET":
+        serializer = OrdinarySerializer(person)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "DELETE":
+        person.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method in ["PUT", "PATCH"]:
+        serializer = OrdinarySerializer(instance=person, data=request.data, partial=(request.method == "PATCH"))
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
